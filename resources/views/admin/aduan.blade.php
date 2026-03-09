@@ -30,7 +30,18 @@
                             <td>{{ $c->anonim ? 'Anonim' : ($c->user->name ?? '-') }}</td>
                             <td>{{ $c->judul }}</td>
                             <td>{{ ucfirst($c->kategori) }}</td>
-                            <td><span class="badge bg-secondary">{{ ucfirst($c->status) }}</span></td>
+                            <td>
+                                @php
+                                    $st = strtolower($c->status);
+                                    $bg = match($st) {
+                                        'selesai' => 'success',
+                                        'diproses' => 'info',
+                                        'ditolak' => 'danger',
+                                        default => 'warning'
+                                    };
+                                @endphp
+                                <span class="badge bg-{{ $bg }}">{{ ucfirst($c->status) }}</span>
+                            </td>
                             <td class="small">{{ $c->tanggapan }}</td>
                             <td>
                                 <form action="{{ route('admin.aduan.update', $c) }}" method="POST" class="d-grid gap-2">

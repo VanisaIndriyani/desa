@@ -31,7 +31,17 @@
                             <td>{{ $bk->facility->nama ?? '-' }}</td>
                             <td>{{ $bk->tanggal }}</td>
                             <td>{{ $bk->mulai }}–{{ $bk->selesai }}</td>
-                            <td><span class="badge bg-secondary">{{ ucfirst($bk->status) }}</span></td>
+                            <td>
+                                @php
+                                    $st = strtolower($bk->status);
+                                    $bg = match($st) {
+                                        'disetujui' => 'success',
+                                        'ditolak' => 'danger',
+                                        default => 'warning'
+                                    };
+                                @endphp
+                                <span class="badge bg-{{ $bg }}">{{ ucfirst($bk->status) }}</span>
+                            </td>
                             <td>
                                 <form action="{{ route('admin.booking.update', $bk) }}" method="POST" class="d-flex align-items-center gap-2">
                                     @csrf

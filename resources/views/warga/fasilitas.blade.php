@@ -103,7 +103,13 @@
                         <div class="list-group">
                             @foreach($bookings as $bk)
                                 @php
-                                    $color = $bk->status === 'menunggu' ? 'warning' : ($bk->status === 'disetujui' ? 'success' : 'danger');
+                                    $st = strtolower($bk->status);
+                                    $color = match($st) {
+                                        'disetujui', 'selesai' => 'success',
+                                        'ditolak' => 'danger',
+                                        'diproses' => 'info',
+                                        default => 'warning'
+                                    };
                                 @endphp
                                 <div class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>

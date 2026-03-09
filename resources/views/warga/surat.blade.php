@@ -83,7 +83,13 @@
                                             <td>{{ $letter->jenis }}</td>
                                             <td>
                                                 @php
-                                                    $color = $letter->status === 'menunggu' ? 'warning' : ($letter->status === 'diproses' ? 'info' : ($letter->status === 'selesai' ? 'success' : 'danger'));
+                                                    $st = strtolower($letter->status);
+                                                    $color = match($st) {
+                                                        'selesai' => 'success',
+                                                        'diproses' => 'info',
+                                                        'ditolak' => 'danger',
+                                                        default => 'warning'
+                                                    };
                                                 @endphp
                                                 <span class="badge bg-{{ $color }}">{{ ucfirst($letter->status) }}</span>
                                             </td>

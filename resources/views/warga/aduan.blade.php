@@ -90,6 +90,12 @@
                                                 <img src="{{ asset('storage/'.$c->foto_path) }}" alt="Lampiran" class="img-fluid rounded" style="max-height:160px">
                                             </div>
                                         @endif
+                                        @if($c->tanggapan)
+                                            <div class="mt-3 p-3 bg-light rounded border-start border-4 border-danger">
+                                                <div class="fw-bold text-danger mb-1"><i class="fa-solid fa-reply me-2"></i>Tanggapan Admin:</div>
+                                                <div class="text-dark small">{{ $c->tanggapan }}</div>
+                                            </div>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

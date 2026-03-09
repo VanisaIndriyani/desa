@@ -29,7 +29,18 @@
                             <td>{{ ($letters->firstItem() ?? 1) + $loop->index }}</td>
                             <td>{{ $l->user->name ?? '-' }}</td>
                             <td>{{ $l->jenis }}</td>
-                            <td><span class="badge bg-secondary">{{ ucfirst($l->status) }}</span></td>
+                            <td>
+                                @php
+                                    $st = strtolower($l->status);
+                                    $bg = match($st) {
+                                        'selesai' => 'success',
+                                        'diproses' => 'info',
+                                        'ditolak' => 'danger',
+                                        default => 'warning'
+                                    };
+                                @endphp
+                                <span class="badge bg-{{ $bg }}">{{ ucfirst($l->status) }}</span>
+                            </td>
                             <td>{{ $l->nomor_surat }}</td>
                             <td>
                                 @if(!empty($l->file_path))

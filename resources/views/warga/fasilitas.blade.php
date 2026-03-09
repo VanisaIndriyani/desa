@@ -19,10 +19,14 @@
                 @forelse($facilities ?? [] as $facility)
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm border-0">
-                            @if($facility->gambar_url)
-                                <img src="{{ $facility->gambar_url }}" class="card-img-top" alt="{{ $facility->nama }}">
+                            @if($facility->gambar_path)
+                                <img src="{{ asset('storage/' . $facility->gambar_path) }}" class="card-img-top" alt="{{ $facility->nama }}" style="height: 200px; object-fit: cover;">
+                            @elseif($facility->gambar_url)
+                                <img src="{{ $facility->gambar_url }}" class="card-img-top" alt="{{ $facility->nama }}" style="height: 200px; object-fit: cover;">
                             @else
-                                <img src="https://via.placeholder.com/600x350?text={{ urlencode($facility->nama) }}" class="card-img-top" alt="{{ $facility->nama }}">
+                                <div class="bg-light d-flex align-items-center justify-content-center text-muted" style="height: 200px;">
+                                    <i class="fa-solid fa-image fa-3x"></i>
+                                </div>
                             @endif
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{ $facility->nama }}</h5>

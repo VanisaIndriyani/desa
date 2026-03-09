@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                            <a class="small text-decoration-none" href="#">Lupa Password?</a>
+                            
                             <button class="btn btn-primary px-4 py-2 fw-semibold rounded-3" type="submit">
                                 <i class="fa-solid fa-right-to-bracket me-2"></i>Masuk
                             </button>
